@@ -1,0 +1,33 @@
+---
+interface Props {
+    image: string;
+    alt: string;
+    name: string;
+    roll:string;
+    testimonial: string;
+  }
+
+  const {image, alt, name, roll, testimonial} = Astro.props;
+---  
+
+<div
+    class="aspect-auto p-8 border border-gray-100 rounded-3xl bg-white shadow-2xl shadow-gray-600/10"
+    >
+    <div class="flex gap-4">
+        <img
+            class="w-12 h-12 rounded-full"
+            src={image}
+            alt={alt}
+            width="400"
+            height="400"
+            loading="lazy"
+        />
+        <div>
+        <span class="text-lg font-medium text-gray-700">{name}</span>
+        <p class="text-sm text-gray-500">{roll}</p>
+        </div>
+    </div>
+    <p class="mt-8">
+        {testimonial}
+    </p>
+</div>
