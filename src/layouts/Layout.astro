@@ -12,10 +12,24 @@ import AppHeader from "../components/AppHeader.astro"
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content="Offcial website of FOSS Community of NSBM">
-		<title>FOSS Community of NSBM</title>
+		<!-- Google tag (gtag.js) -->
+		<script 
+			type="text/partytown" 
+			async 
+			src="https://www.googletagmanager.com/gtag/js?id=G-WLS1FP9R7C"
+		></script>
+		<script 
+			type="text/partytown">
+  			window.dataLayer = window.dataLayer || [];
+  			function gtag(){dataLayer.push(arguments);}
+  			gtag('js', new Date());
 
+  			gtag('config', 'G-WLS1FP9R7C');
+		</script>
+		<title>FOSS Community of NSBM</title>
 		<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet">
 	</head>
+
 	<body class="bg-white">
 		<AppHeader/>
 		<slot />
