@@ -1,0 +1,132 @@
+---
+import Container from "./Container.astro";
+---
+
+ <Container>
+   <div class="min-h-screen bg-white flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div class="sm:mx-auto sm:w-full sm:max-w-md">
+        <h2 class="mt-6 text-center text-4xl font-bold text-gray-900">
+            FOSS Community of NSBM.
+        </h2>
+    </div>
+
+    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        <div class="bg-white py-8 px-4 shadow-2xl sm:rounded-lg sm:px-10">
+            <form class="space-y-6" action="#" method="POST">
+                <div>
+                    <label for="email" class="block text-lg font-medium text-gray-700">
+                        Email
+                    </label>
+                    <div class="mt-1">
+                        <input id="email" name="email" type="email" autocomplete="email" required
+                            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                            placeholder="Enter your email address">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="firstname" class="block text-lg font-medium text-gray-700">
+                        First Name
+                    </label>
+                    <div class="mt-1">
+                        <input id="firstname" name="firstname" type="text"  required
+                            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                            placeholder="Enter your First Name">
+                    </div>
+                </div>
+
+                  <div>
+                    <label for="lastname" class="block text-lg font-medium text-gray-700">
+                        Last Name
+                    </label>
+                    <div class="mt-1">
+                        <input id="lastname" name="lastname" type="text"  required
+                            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                            placeholder="Enter your Last Name">
+                    </div>
+                 </div>
+                   
+           
+                 <div>
+                    <label for="batch" class="block text-lg font-medium text-gray-700">
+                        Batch
+                    </label>
+                       
+                
+                
+  <div class="flex flex-wrap">
+        <div class="flex items-center me-4">
+            <input id="inline-radio" type="radio" value="" name="inline-radio-group" class="w-4 h-4 text-blue-600 bg-gray-100  border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+             <label for="inline-radio" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">23.1</label>
+        </div>
+
+    <div class="flex items-center me-4">
+        <input id="inline-2-radio" type="radio" value="" name="inline-radio-group" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+        <label for="inline-2-radio" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">23.2</label>
+    </div>
+
+    <div class="flex items-center me-4">
+        <input checked id="inline-checked-radio" type="radio" value="" name="inline-radio-group" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+        <label for="inline-checked-radio" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">23.3</label>
+    </div>
+
+    <div class="flex items-center me-4">
+        <input id="inline-radio" type="radio" value="" name="inline-radio-group" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+        <label for="inline-radio" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">24.1</label>
+    </div>
+
+    <div class="flex items-center me-4">
+        <input id="inline-2-radio" type="radio" value="" name="inline-radio-group" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+        <label for="inline-2-radio" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">24.2</label>
+    </div>
+
+    <div class="flex items-center me-4">
+        <input checked id="inline-checked-radio" type="radio" value="" name="inline-radio-group" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+        <label for="inline-checked-radio" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">24.3</label>
+    </div>
+</div>
+
+
+    </div>
+
+
+                 <div>
+                    <label for="phone" class="block text-lg font-medium text-gray-700">
+                        Phone Number
+                    </label>
+                    
+                    <div class="mt-1">
+                        <input id="phone" name="phone" type="tel"  required  
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '');"
+                            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                            pattern="[0-9]*" 
+                            inputmode="numeric"
+                            placeholder="Enter your Phone number">
+                    </div>
+                 </div>
+ 
+
+
+                <div>
+                    <button type="submit"
+                        class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-[#65BBD0] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+
+                        Register
+                    </button>
+                </div>
+            </form>
+            <div class="mt-6">
+
+                <div class="relative">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-gray-300"></div>
+                    </div>
+                    
+                </div>
+
+              
+            </div>
+        </div>
+    </div>
+  </div>
+ </Container>
