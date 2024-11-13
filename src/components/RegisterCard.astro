@@ -1,5 +1,58 @@
 ---
-import Container from "./Container.astro";
+import Container from './Container.astro';
+import { sql } from '../lib/neon';
+
+let responseSent = false;  // Track if a response is already sent
+
+if (Astro.request.method === "POST") {
+  try {
+    const contentType = Astro.request.headers.get("content-type") || "";
+    let data;
+
+    // Handle form data or JSON based on content type
+    if (contentType.includes("application/x-www-form-urlencoded") || contentType.includes("multipart/form-data")) {
+      data = await Astro.request.formData();
+    } else if (contentType.includes("application/json")) {
+      data = await Astro.request.json();
+    }
+
+    // Retrieve form data
+    const firstname = data.get("firstname");
+    const lastname = data.get("lastname");
+    const email = data.get("email");
+    const phone = data.get("phone");
+    const batch = data.get("batch");
+    const department = data.get("department");
+
+    // Check for required fields
+    if (!firstname || !lastname || !email || !phone || !batch || !department) {
+      if (!responseSent) {
+        responseSent = true;
+        return new Response('Missing required fields.', { status: 400 });
+      }
+    }
+
+    console.log("Name:", `${firstname} ${lastname}`);
+    console.log("Email:", email);
+    console.log("Phone:", phone);
+    console.log("Batch:", batch);
+    console.log("Department:", department);
+
+    // Insert data into the database
+    await sql`
+      INSERT INTO users (firstname, lastname, email, phone, batch, department) 
+      VALUES (${firstname}, ${lastname}, ${email}, ${phone}, ${batch}, ${department})
+    `;
+
+   
+  } catch (error) {
+    console.error("Error storing data:", error);
+    if (!responseSent) {
+      responseSent = true;
+      return new Response('Error storing data.', { status: 500 });
+    }
+  }
+}
 ---
 
 <Container>
@@ -12,12 +65,12 @@ import Container from "./Container.astro";
 
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
       <div class="bg-white py-8 px-4 shadow-2xl sm:rounded-lg sm:px-10">
-        <form class="space-y-6" action="#" method="POST">
+        <form class="space-y-6" action="/register" method="POST" enctype="application/x-www-form-urlencoded">
           <div>
             <label for="email" class="block text-lg font-medium text-gray-700">
               Email
             </label>
-            <div class="mt-1">
+            <div class="mt-1">  
               <input 
                 id="email" 
                 name="email" 
@@ -26,7 +79,7 @@ import Container from "./Container.astro";
                 required
                 class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Enter your email address"
-              >
+              />
             </div>
           </div>
 
@@ -42,7 +95,7 @@ import Container from "./Container.astro";
                 required
                 class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Enter your First Name"
-              >
+              />
             </div>
           </div>
 
@@ -58,7 +111,7 @@ import Container from "./Container.astro";
                 required
                 class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Enter your Last Name"
-              >
+              />
             </div>
           </div>
 
@@ -73,61 +126,11 @@ import Container from "./Container.astro";
                   type="radio" 
                   value="23.1" 
                   name="batch" 
-                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                >
-                <label for="batch-23.1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">23.1</label>
+                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
+                />
+                <label for="batch-23.1" class="ms-2 text-sm font-medium text-gray-900">23.1</label>
               </div>
-              <div class="flex items-center me-4">
-                <input 
-                  id="batch-23.2" 
-                  type="radio" 
-                  value="23.2" 
-                  name="batch" 
-                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                >
-                <label for="batch-23.2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">23.2</label>
-              </div>
-              <div class="flex items-center me-4">
-                <input 
-                  id="batch-23.3" 
-                  type="radio" 
-                  value="23.3" 
-                  name="batch" 
-                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                  checked
-                >
-                <label for="batch-23.3" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">23.3</label>
-              </div>
-              <div class="flex items-center me-4">
-                <input 
-                  id="batch-24.1" 
-                  type="radio" 
-                  value="24.1" 
-                  name="batch" 
-                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                >
-                <label for="batch-24.1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">24.1</label>
-              </div>
-              <div class="flex items-center me-4">
-                <input 
-                  id="batch-24.2" 
-                  type="radio" 
-                  value="24.2" 
-                  name="batch" 
-                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                >
-                <label for="batch-24.2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">24.2</label>
-              </div>
-              <div class="flex items-center me-4">
-                <input 
-                  id="batch-24.3" 
-                  type="radio" 
-                  value="24.3" 
-                  name="batch" 
-                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                >
-                <label for="batch-24.3" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">24.3</label>
-              </div>
+              <!-- Add other batch radio inputs here as needed -->
             </div>
           </div>
 
@@ -146,7 +149,7 @@ import Container from "./Container.astro";
                 pattern="[0-9]*" 
                 inputmode="numeric"
                 placeholder="Enter your Phone number"
-              >
+              />
             </div>
           </div>
 
@@ -182,5 +185,4 @@ import Container from "./Container.astro";
       </div>
     </div>
   </div>
-  <script src="./RegisterCardSubmition.js" defer></script>
 </Container>
