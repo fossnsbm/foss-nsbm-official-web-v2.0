@@ -19,4 +19,10 @@ export default defineConfig({
     }),
     sitemap(),
   ],
+  middleware: [
+    {
+      src: './src/middleware.ts', // Ensure the correct path here
+    },
+  ],
+  
 });

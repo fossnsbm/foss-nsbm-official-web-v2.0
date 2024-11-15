@@ -1,10 +1,11 @@
-// src/pages/api/register.js
-
 import { sql } from '../../lib/neon';
+
+
 
 export async function POST({ request }) {
   try {
     console.log("Received request to register");
+   
 
     const contentType = request.headers.get("content-type") || "";
     let data;

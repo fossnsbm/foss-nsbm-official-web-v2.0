@@ -2,6 +2,29 @@
 import AppFooter from "../components/AppFooter.astro";
 import AppHeader from "../components/AppHeader.astro";
 import RegisterCard from "../components/RegisterCard.astro";
+import { getSession } from "auth-astro/server";
+import { sql } from "../lib/neon";
+const session = await getSession(Astro.request);
+
+if (session && session.user) {
+  
+
+  const emailExists = await sql`
+      SELECT COUNT(*) 
+      FROM users 
+      WHERE email = ${session.user.email}
+    `;
+    
+    if (emailExists[0].count > 0) {
+      console.log("Email is already registered.");
+      return Astro.redirect('/dashboard');  
+    }
+
+  
+
+}
+
+
 ---
 
 
