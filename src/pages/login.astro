@@ -1,8 +1,39 @@
 ---
 import AppFooter from "../components/AppFooter.astro";
 import AppHeader from "../components/AppHeader.astro";
-import RegisterCard from "../components/RegisterCard.astro";
-import { SignIn } from "auth-astro/components";
+import { SignIn, SignOut } from "auth-astro/components";
+import { getSession } from "auth-astro/server";
+import { sql } from "../lib/neon";  // Importing sql from the neon client
+
+
+// Get the session data from the request
+const session = await getSession(Astro.request);
+
+// Function to store email in Neon (PostgreSQL) using the neon client
+async function storeUserEmail(email: string) {
+  try {
+    // Insert or update the email and last login time in the users table
+    await sql`
+      INSERT INTO users (email, last_login)
+      VALUES (${email}, NOW())
+      ON CONFLICT (email)
+      DO UPDATE SET last_login = NOW();
+    `;
+    // After storing the email, redirect to the dashboard
+    return '/dashboard'; // Return the redirect URL
+  } catch (error) {
+    console.error("Error storing email in Neon:", error);
+    return '/error'; // Redirect to an error page in case of failure
+  }
+}
+
+// If the user is logged in, store the email and redirect
+if (session && session.user?.email) {
+  const redirectTo = await storeUserEmail(session.user.email);
+  if (redirectTo) {
+    return Astro.redirect('/lo');  // Use Astro's redirect method
+  }
+}
 ---
 
 <!DOCTYPE html>
@@ -12,16 +43,8 @@ import { SignIn } from "auth-astro/components";
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <meta
-      name="description"
-      content="Official website of FOSS Community of NSBM"
-    />
-   
-    <script
-      type="text/partytown"
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-WLS1FP9R7C"
-    ></script>
+    <meta name="description" content="Official website of FOSS Community of NSBM" />
+    <script type="text/partytown" async src="https://www.googletagmanager.com/gtag/js?id=G-WLS1FP9R7C"></script>
     <script type="text/partytown">
       window.dataLayer = window.dataLayer || [];
       function gtag() {
@@ -31,14 +54,8 @@ import { SignIn } from "auth-astro/components";
       gtag('config', 'G-WLS1FP9R7C');
     </script>
     <title>FOSS Community of NSBM</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   </head>
 
   <body class="bg-gray-100">
@@ -50,19 +67,27 @@ import { SignIn } from "auth-astro/components";
         </h1>
         <p class="text-gray-500 mb-6">Login to continue</p>
         <div class="flex flex-col gap-4">
-          <SignIn provider="github">
-            <div
-              class="w-full bg-gray-800 text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition cursor-pointer"
-            >
-              Login with GitHub
-            </div>
-          </SignIn>
+          {session ? (
+            <>
+              <p>Hola, {session.user?.email}</p>
+              <SignOut>Sign Out</SignOut>
+            </>
+          ) : (
+            <>
+              <SignIn provider="github">
+                <div class="w-full bg-gray-800 text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition cursor-pointer">
+                  Login with GitHub
+                </div>
+              </SignIn>
+            </>
+          )}
         </div>
       </div>
     </main>
-   
+    <AppFooter />
   </body>
 </html>
+
 <style>
   html {
     font-family: Urbanist, sans-serif;
