@@ -1,0 +1,75 @@
+---
+import AppFooter from "../components/AppFooter.astro";
+import AppHeader from "../components/AppHeader.astro";
+import RegisterCard from "../components/RegisterCard.astro";
+import { SignIn } from "auth-astro/components";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <meta
+      name="description"
+      content="Official website of FOSS Community of NSBM"
+    />
+   
+    <script
+      type="text/partytown"
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-WLS1FP9R7C"
+    ></script>
+    <script type="text/partytown">
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-WLS1FP9R7C');
+    </script>
+    <title>FOSS Community of NSBM</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="bg-gray-100">
+    <AppHeader />
+    <main class="h-screen flex items-center justify-center">
+      <div class="bg-white shadow-md rounded-lg p-6 w-96 text-center">
+        <h1 class="text-2xl font-semibold text-gray-800 mb-4">
+          Welcome to FOSS Community
+        </h1>
+        <p class="text-gray-500 mb-6">Login to continue</p>
+        <div class="flex flex-col gap-4">
+          <SignIn provider="github">
+            <div
+              class="w-full bg-gray-800 text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition cursor-pointer"
+            >
+              Login with GitHub
+            </div>
+          </SignIn>
+        </div>
+      </div>
+    </main>
+   
+  </body>
+</html>
+<style>
+  html {
+    font-family: Urbanist, sans-serif;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+  }
+</style>
