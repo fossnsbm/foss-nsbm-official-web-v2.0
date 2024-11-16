@@ -1,0 +1,56 @@
+---
+import AppFooter from "../components/AppFooter.astro";
+import AppHeader from "../components/AppHeader.astro";
+import RegisterCard from "../components/RegisterCard.astro";
+import { getSession } from "auth-astro/server";
+import { sql } from "../lib/neon";
+import Learning from "../components/Learning.astro";
+const session = await getSession(Astro.request);
+
+
+
+---
+
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content="Offcial website of FOSS Community of NSBM">
+		<!-- Google tag (gtag.js) -->
+		<script 
+			type="text/partytown" 
+			async 
+			src="https://www.googletagmanager.com/gtag/js?id=G-WLS1FP9R7C"
+		></script>
+		<script 
+			type="text/partytown">
+  			window.dataLayer = window.dataLayer || [];
+  			function gtag(){dataLayer.push(arguments);}
+  			gtag('js', new Date());
+
+  			gtag('config', 'G-WLS1FP9R7C');
+		</script>
+		<title>FOSS Community of NSBM</title>
+		<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet">
+	</head>
+
+	<body class="bg-white ">
+		<AppHeader/>
+        <Learning/>
+        
+	</body>
+</html>
+<style>
+	html {
+		font-family: Urbanist, sans-serif;
+		scroll-behavior: smooth;
+	}
+
+	body {
+		margin: 0;
+	}
+</style>

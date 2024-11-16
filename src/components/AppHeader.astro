@@ -11,7 +11,7 @@ const session = await getSession(Astro.request);
 ---
 
 <header>
-  <nav class="z-10 w-full fixed top-0 h-max  backdrop-blur-md  ">
+  <nav class="z-10 w-full fixed top-0 h-max  backdrop-blur-md ">
     
     <Container>
       <div
@@ -60,7 +60,7 @@ const session = await getSession(Astro.request);
         <div
           class="flex-col  z-20 flex-wrap gap-6 p-8 rounded-3xl border border-gray-100 bg-white shadow-2xl shadow-gray-600/10 justify-end w-full invisible opacity-0 translate-y-1 absolute top-full left-0 transition-all duration-300 scale-95 origin-top lg:relative lg:scale-100 lg:peer-checked:translate-y-0 lg:translate-y-0 lg:flex lg:flex-row lg:items-center lg:gap-0 lg:p-0 lg:bg-transparent lg:w-7/12 lg:visible lg:opacity-100 lg:border-none peer-checked:scale-100 peer-checked:opacity-100 peer-checked:visible lg:shadow-none"
         >
-          <div class="text-gray-600 lg:pr-4 lg:w-auto w-full lg:pt-0  ">
+          <div class=" lg:pr-4 lg:w-auto w-full lg:pt-0  text-black  font-bold text-5xl">
             <ul
               class="tracking-wide font-medium lg:text-sm flex-col flex lg:flex-row gap-6 lg:gap-0"
             >
@@ -70,6 +70,14 @@ const session = await getSession(Astro.request);
                   class="block md:px-4 transition hover:text-primary"
                 >
                   <span>About</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/fosslearn"
+                  class="block md:px-4 transition hover:text-primary"
+                >
+                  <span>Foss Learning</span>
                 </a>
               </li>
               <li>
