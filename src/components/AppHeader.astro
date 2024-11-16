@@ -1,5 +1,13 @@
 ---
 import Container from "./Container.astro";
+import { getSession } from "auth-astro/server";
+import { SignIn, SignOut } from "auth-astro/components";
+import GitHub from "@auth/core/providers/github";
+
+const session = await getSession(Astro.request);
+
+
+
 ---
 
 <header>
@@ -8,13 +16,7 @@ import Container from "./Container.astro";
       <div
         class="flex flex-wrap items-center justify-between py-2 gap-6 md:py-4 md:gap-0 relative"
       >
-        <input
-          aria-hidden="true"
-          type="checkbox"
-          name="toggle_nav"
-          id="toggle_nav"
-          class="hidden peer"
-        />
+        
         <div class="relative z-20 w-full flex justify-between lg:w-max md:px-0">
           <a href="/" aria-label="logo" class="flex space-x-2 items-center">
             <img
@@ -23,6 +25,7 @@ import Container from "./Container.astro";
               width="45"
             />
           </a>
+          
 
           <div class="relative flex items-center lg:hidden max-h-10">
             <label
@@ -93,17 +96,62 @@ import Container from "./Container.astro";
               </li>
             </ul>
           </div>
+        
 
-          <div class="mt-12 lg:mt-0">
+         
+            {!session ?(
+       
+            <div class="mt-12 lg:mt-0">
+          <SignIn provider="github">
+
             <a
-              href="/"
               class="relative flex h-9 w-full items-center justify-center px-4 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
             >
               <span class="relative text-sm font-semibold text-white"
-                >Contact us</span
-              >
+                >Login</span>
             </a>
+              </SignIn>
           </div>
+       
+       
+
+            ):
+            (<div class=" gap-4 flex">
+              <div class="mt-12 lg:mt-0">
+           
+            <a
+             href="/register"
+             class="relative flex h-9 w-full items-center justify-center px-4 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
+             >
+              <span class="relative text-sm font-semibold text-white"
+                >Event </span>
+              
+            </a>
+          
+            </div>
+
+            <div class="mt-12 lg:mt-0">
+              <SignOut>
+            <a
+             
+             class="relative flex h-9 w-full items-center justify-center px-4 before:absolute before:inset-0 before:rounded-full before:bg-red-500 before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
+             >
+              <span class="relative text-sm font-semibold text-white"
+                >LogOut</span>
+              
+            </a>
+          </SignOut>
+            </div>
+
+            </div>
+
+            )}
+           
+          
+         
+         
+
+
         </div>
       </div>
     </Container>
