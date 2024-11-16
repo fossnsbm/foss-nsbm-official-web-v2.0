@@ -2,14 +2,12 @@
 import AppFooter from "../components/AppFooter.astro";
 import AppHeader from "../components/AppHeader.astro";
 import RegisterCard from "../components/RegisterCard.astro";
-import { getSession } from "auth-astro/server";
-import { sql } from "../lib/neon";
-import  Event  from "../components/Events.astro";
+import  Event_section  from "../components/Events.astro";
 import { getSession } from "auth-astro/server";
 import { sql } from "../lib/neon";
 const session = await getSession(Astro.request);
 
-if (session ) {
+if (session && session.user && session.user.email) {
   
 
   const emailExists = await sql`
@@ -61,7 +59,7 @@ if (session ) {
 	<body class="bg-white">
 		<AppHeader/>
 		
-		<Event/> 
+		<Event_section/> 
 
 		
 	</body>
