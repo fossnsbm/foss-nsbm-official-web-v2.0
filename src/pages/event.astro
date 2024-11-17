@@ -2,11 +2,12 @@
 import AppFooter from "../components/AppFooter.astro";
 import AppHeader from "../components/AppHeader.astro";
 import RegisterCard from "../components/RegisterCard.astro";
+import  Event_section  from "../components/Events.astro";
 import { getSession } from "auth-astro/server";
 import { sql } from "../lib/neon";
 const session = await getSession(Astro.request);
 
-if (session && session.user) {
+if (session && session.user && session.user.email) {
   
 
   const emailExists = await sql`
@@ -17,14 +18,15 @@ if (session && session.user) {
     
     if (emailExists[0].count > 0) {
       console.log("Email is already registered.");
-      return Astro.redirect('/event');  
+     
     }
+	else{
+		return Astro.redirect('/register');  
+	}
 
   
 
 }
-
-
 ---
 
 
@@ -56,8 +58,10 @@ if (session && session.user) {
 
 	<body class="bg-white">
 		<AppHeader/>
-		 <RegisterCard/>
-		<AppFooter/>
+		
+		<Event_section/> 
+
+		
 	</body>
 </html>
 <style>

@@ -1,0 +1,58 @@
+---
+import NavBarSidebar from './NavBarSidebar.astro';
+import SideBar from './SideBar.astro';
+---
+
+
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="UTF-8" />
+			<meta name="viewport" content="width=device-width" />
+			<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+			<meta name="generator" content={Astro.generator} />
+			<meta name="description" content="Offcial website of FOSS Community of NSBM">
+			<script 
+				type="text/partytown" 
+				async 
+				src="https://www.googletagmanager.com/gtag/js?id=G-WLS1FP9R7C"
+			></script>
+			<script 
+				type="text/partytown">
+				  window.dataLayer = window.dataLayer || [];
+				  function gtag(){dataLayer.push(arguments);}
+				  gtag('js', new Date());
+	
+				  gtag('config', 'G-WLS1FP9R7C');
+			</script>
+			<title>FOSS Community of NSBM</title>
+			<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet">
+		</head>
+	
+		<body class="bg-white">
+
+	<NavBarSidebar />
+	<SideBar />
+
+	<div class="flex pt-16 overflow-hidden bg-gray-50 dark:bg-gray-900">
+		<div
+			id="main-content"
+			class="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900 min-h-screen"
+		>
+			<slot />
+
+			
+		</div>
+	</div>
+		</body>
+	</html>
+	<style>
+		html {
+			font-family: Urbanist, sans-serif;
+			scroll-behavior: smooth;
+		}
+	
+		body {
+			margin: 0;
+		}
+	</style>

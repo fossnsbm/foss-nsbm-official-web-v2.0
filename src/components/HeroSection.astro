@@ -1,5 +1,12 @@
 ---
 import Container from "./Container.astro";
+import { getSession } from "auth-astro/server";
+
+const session = await getSession(Astro.request);
+const env = import.meta.env;
+
+
+
 ---
 
 <div class="relative" id="home">
@@ -41,24 +48,67 @@ import Container from "./Container.astro";
           and innovation.
         </p>
         <div class="mt-16 flex flex-wrap justify-center gap-y-4 gap-x-6">
+          
+            {!session ?(
+
           <a
-            href="/register"
-            target="_blank"
+           href="/login"
+          
             class="relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
-          >
+            data-astro-transition
+            
+            >
 
             <span class="relative text-base font-semibold text-white"
-              >Become a volunteer</span
-            >
+              >For Contributing..</span >
           </a>
-          <a
-            href="#"
-            class="relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:border before:border-transparent before:bg-primary/10 before:bg-gradient-to-b before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
-          >
-            <span class="relative text-base font-semibold text-primary"
-              >Learn more</span
-            >
-          </a>
+          
+
+            ):
+            
+            
+            (<div>
+              <div class="flex justify-center w-full flex-col text-center gap-5">
+               <h1 class=" text-gray-900 font-medium text-4xl">Welcome to the Foss Community</h1>
+               <h2>{session.user?.name}</h2>
+               <div class="w-full justify-center flex">
+               <a href="#" class="relative flex h-11 w-full items-center justify-center  px-6 before:absolute before:inset-0 before:rounded-full before:border before:border-transparent before:bg-primary/10 before:bg-gradient-to-b before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max" >
+                        <span class="relative text-base font-semibold text-primary"
+                          >Learn more</span>
+                      </a>
+                      {(session?.user?.email===env.EMAIL_ADMIN) &&(
+              
+            
+              <a
+              href="/dashboard"
+               
+               class="relative flex  h-9 w-full items-center justify-center px-4 before:absolute before:inset-0 before:rounded-full before:bg-info cursor-pointer before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
+               >
+                <span class="relative text-sm font-semibold text-white"
+                  >Dashbord</span>
+                
+              </a>
+            
+             
+              )}
+                    </div>
+              </div>
+              
+              
+             
+               
+               
+                   
+               
+
+            </div>
+
+            )}
+         
+
+
+       
+          
         </div>
         <div
           class="hidden py-8 mt-16 border-y border-gray-100 sm:flex justify-between"
@@ -80,7 +130,7 @@ import Container from "./Container.astro";
       <div
         class="mt-12 grid grid-cols-1 sm:grid-cols-4 md:grid-cols-7 items-center"
       >
-        <div class="p-4 md:grayscale transition duration-200 hover:grayscale-0">
+        <div class="p-4  transition duration-200 ">
           <img
             src="./images/communities/mozilla.webp"
             class="h-20 w-auto mx-auto"
@@ -90,7 +140,7 @@ import Container from "./Container.astro";
             height=""
           />
         </div>
-        <div class="p-4 md:grayscale transition duration-200 hover:grayscale-0">
+        <div class="p-4  transition duration-200 ">
           <img
             src="./images/communities/croudsource.webp"
             class="h-20 md:h-22 w-auto mx-auto"
@@ -101,7 +151,7 @@ import Container from "./Container.astro";
           />
         </div>
         <div
-          class="p-4 flex md:grayscale transition duration-200 hover:grayscale-0"
+          class="p-4 flex  transition duration-200 "
         >
           <img
             src="./images/communities/devops.webp"
@@ -112,7 +162,7 @@ import Container from "./Container.astro";
             height=""
           />
         </div>
-        <div class="p-4 md:grayscale transition duration-200 hover:grayscale-0">
+        <div class="p-4  transition duration-200 ">
           <img
             src="./images/communities/wif.webp"
             class="h-12 w-auto mx-auto"
@@ -123,7 +173,7 @@ import Container from "./Container.astro";
           />
         </div>
         <div
-          class="p-4 flex md:grayscale transition duration-200 hover:grayscale-0"
+          class="p-4 flex transition duration-200 "
         >
           <img
             src="./images/communities/devlab.webp"
@@ -134,7 +184,7 @@ import Container from "./Container.astro";
             height=""
           />
         </div>
-        <div class="p-4 md:grayscale transition duration-200 hover:grayscale-0">
+        <div class="p-4  transition duration-200 ">
           <img
             src="./images/communities/owasp.webp"
             class="h-20 w-auto mx-auto"
@@ -144,7 +194,7 @@ import Container from "./Container.astro";
             height=""
           />
         </div>
-        <div class="p-4 md:grayscale transition duration-200 hover:grayscale-0">
+        <div class="p-4  transition duration-200 ">
           <img
             src="./images/communities/devoke.webp"
             class="h-20 w-auto mx-auto"

@@ -1,6 +1,7 @@
 ---
 import Container from './Container.astro';
-
+import { getSession } from "auth-astro/server";
+const session = await getSession(Astro.request);
 ---
 
 <Container>
@@ -14,7 +15,7 @@ import Container from './Container.astro';
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
       <div class="bg-white py-8 px-4 shadow-2xl sm:rounded-lg sm:px-10">
         <form class="space-y-6"  method="POST" action="/api/register">
-          <div>
+          <div class=" hidden">
             <label for="email" class="block text-lg font-medium text-gray-700">
               Email
             </label>
@@ -22,11 +23,14 @@ import Container from './Container.astro';
               <input 
                 id="email" 
                 name="email" 
+                value={session?.user?.email as string}
                 type="email" 
                 autocomplete="email" 
+                readonly
                 required
                 class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Enter your email address"
+                
               />
             </div>
           </div>
@@ -74,6 +78,7 @@ import Container from './Container.astro';
                   type="radio" 
                   value="23.1" 
                   name="batch" 
+                  required
                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
                 />
                 <label for="batch-23.1" class="ms-2 text-sm font-medium text-gray-900">23.1</label>
@@ -83,6 +88,7 @@ import Container from './Container.astro';
                   id="batch-23.2" 
                   type="radio" 
                   value="23.2" 
+                  required
                   name="batch" 
                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
                 />
@@ -94,6 +100,7 @@ import Container from './Container.astro';
                   type="radio" 
                   value="24.1" 
                   name="batch" 
+                  required
                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
                 />
                 <label for="batch-24.1" class="ms-2 text-sm font-medium text-gray-900">24.1</label>
@@ -104,6 +111,7 @@ import Container from './Container.astro';
                   type="radio" 
                   value="24.2" 
                   name="batch" 
+                  required
                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
                 />
                 <label for="batch-24.2" class="ms-2 text-sm font-medium text-gray-900">24.2</label>
@@ -121,6 +129,7 @@ import Container from './Container.astro';
               <input 
                 id="phone" 
                 name="phone" 
+                required
                 type="tel" 
                 required
                 oninput="this.value = this.value.replace(/[^0-9]/g, '');"
@@ -144,10 +153,33 @@ import Container from './Container.astro';
                 class="appearance-none rounded-md block w-full px-3 py-2 border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               >
                 <option value="">Select your department</option>
-                <option value="CS">Computer Science</option>
-                <option value="IT">Information Technology</option>
-                <option value="SE">Software Engineering</option>
-                <option value="DS">Data Science</option>
+                <option value="Computer_Science">Computer Science</option>
+                <option value="Information_Technology">Information Technology</option>
+                <option value="Software_Engineering">Software Engineering</option>
+                <option value="Data_Science">Data Science</option>
+                <option value="Computer_Networking">Computer Networking</option>
+                <option value="Computer_Security">Computer Security</option>
+              </select>
+            </div>
+          </div>
+
+          
+          <div>
+            <label for="attitude" class="block text-lg font-medium text-gray-700">
+             Career focus
+            </label>
+            <div class="mt-1">
+              <select 
+                id="focus" 
+                name="focus" 
+                required
+                class="appearance-none rounded-md block w-full px-3 py-2 border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              >
+                <option value="">Select your Focus</option>
+                <option value="designing">Designing</option>
+                <option value="development">Development</option>
+                <option value="post_editing">Post Editing</option>
+                <option value="Vedio_editing">Vedio Editing</option>
               </select>
             </div>
           </div>
