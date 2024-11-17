@@ -22,6 +22,7 @@ export async function POST({ request }) {
 
 
     const firstname = data.get("firstname");
+    const focus = data.get("focus");
     const lastname = data.get("lastname");
     const email = data.get("email");
     const phone = data.get("phone");
@@ -29,16 +30,16 @@ export async function POST({ request }) {
     const department = data.get("department");
 
  
-    if (!firstname || !lastname || !email || !phone || !batch || !department) {
+    if (!firstname || !lastname || !email || !phone || !batch || !department || !focus) {
       return new Response('Missing required fields.', { status: 400 });
     }
 
-    console.log("Inserting data:", { firstname, lastname, email, phone, batch, department });
+    console.log("Inserting data:", { firstname, lastname, email, phone, batch, department, focus });
 
  
     const result = await sql`
-      INSERT INTO users (firstname, lastname, email, phone, batch, department) 
-      VALUES (${firstname}, ${lastname}, ${email}, ${phone}, ${batch}, ${department})
+      INSERT INTO register (firstname, lastname, email, phone, batch, department,focus) 
+      VALUES (${firstname}, ${lastname}, ${email}, ${phone}, ${batch}, ${department},${focus})
     `;
     
 

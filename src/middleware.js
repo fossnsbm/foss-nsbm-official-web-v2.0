@@ -1,5 +1,5 @@
 import { defineMiddleware } from "astro:middleware";
-import { getSession } from "auth-astro/server"; // Assuming you use auth-astro for session management
+import { getSession } from "auth-astro/server"; 
 
 export const onRequest = defineMiddleware(async (context, next) => {
   const { request } = context;

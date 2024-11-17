@@ -11,7 +11,7 @@ if (session && session.user) {
 
   const emailExists = await sql`
       SELECT COUNT(*) 
-      FROM users 
+      FROM register 
       WHERE email = ${session.user.email}
     `;
     

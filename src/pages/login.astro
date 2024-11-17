@@ -10,7 +10,7 @@ async function storeUserEmail(email: string) {
   try {
 
     await sql`
-      INSERT INTO userss (email)
+      INSERT INTO gitusers (email)
       VALUES (${email})
       ON CONFLICT (email) DO NOTHING;
     `;    
