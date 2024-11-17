@@ -30,8 +30,17 @@ export const onRequest = defineMiddleware(async (context, next) => {
       });
     }
   }
+  if (request.url.endsWith('/dashboard')) {
+    const session = await getSession(request);
+  
+    if (!session ||session.user?.email !== 'warushayohan80@gmail.com') {
+      return new Response("Redirecting to login...", {
+        status: 302,
+        headers: { Location: '/login' },
+      });
+    }
+ 
+  }
 
-
-  // Allow request to continue if session exists or the path is not '/register'
   return next();
 });

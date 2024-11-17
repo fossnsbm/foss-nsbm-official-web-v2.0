@@ -15,12 +15,12 @@ export default defineConfig({
   integrations: [
     auth(),
     tailwind(),
+    sitemap(),
     partytown({
       config: {
         forward: ["dataLayer.push"],
       },
     }),
-    sitemap(),
   ],
   middleware: [
     {
