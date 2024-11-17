@@ -3,6 +3,8 @@ import Container from "./Container.astro";
 import { getSession } from "auth-astro/server";
 
 const session = await getSession(Astro.request);
+const env = import.meta.env;
+
 
 
 ---
@@ -58,7 +60,7 @@ const session = await getSession(Astro.request);
             >
 
             <span class="relative text-base font-semibold text-white"
-              >Become a volunteer</span >
+              >For Contributing..</span >
           </a>
           
 
@@ -74,6 +76,21 @@ const session = await getSession(Astro.request);
                         <span class="relative text-base font-semibold text-primary"
                           >Learn more</span>
                       </a>
+                      {(session?.user?.email===env.EMAIL_ADMIN) &&(
+              
+            
+              <a
+              href="/dashboard"
+               
+               class="relative flex  h-9 w-full items-center justify-center px-4 before:absolute before:inset-0 before:rounded-full before:bg-info cursor-pointer before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
+               >
+                <span class="relative text-sm font-semibold text-white"
+                  >Dashbord</span>
+                
+              </a>
+            
+             
+              )}
                     </div>
               </div>
               

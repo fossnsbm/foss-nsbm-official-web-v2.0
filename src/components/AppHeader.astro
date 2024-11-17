@@ -3,8 +3,10 @@ import Container from "./Container.astro";
 import { getSession } from "auth-astro/server";
 import { SignIn, SignOut } from "auth-astro/components";
 import GitHub from "@auth/core/providers/github";
+import Email from "@auth/core/providers/email";
 
 const session = await getSession(Astro.request);
+const env = import.meta.env;
 
 
 
@@ -104,7 +106,13 @@ const session = await getSession(Astro.request);
                   <span>Blog</span>
                 </a>
               </li>
+
+              <li>
+             
+              </li>
             </ul>
+           
+         
           </div>
         
 
@@ -122,11 +130,18 @@ const session = await getSession(Astro.request);
             </a>
               </SignIn>
           </div>
+
        
        
 
             ):
-            (<div class=" gap-4 flex">
+            (
+            
+            
+            
+            
+            
+            <div class=" gap-4 flex">
               <div class="mt-12 lg:mt-0">
            
             <a
@@ -134,7 +149,7 @@ const session = await getSession(Astro.request);
              class="relative flex h-9 w-full items-center justify-center px-4 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
              >
               <span class="relative text-sm font-semibold text-white"
-                >Event </span>
+                >Events for contribute </span>
               
             </a>
           
@@ -156,7 +171,8 @@ const session = await getSession(Astro.request);
             </div>
 
             )}
-           
+
+          
           
          
          
