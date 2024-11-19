@@ -10,10 +10,11 @@ async function storeUserEmail(email: string) {
   try {
 
     await sql`
-      INSERT INTO gitusers (email)
-      VALUES (${email})
-      ON CONFLICT (email) DO NOTHING;
-    `;    
+  INSERT INTO gitusers (email, last_login)
+  VALUES (${email}, CURRENT_TIMESTAMP)
+  ON CONFLICT (email) DO NOTHING;
+`;
+
 
   } catch (error) {
     console.error("Error storing email in Neon:", error);

@@ -6,7 +6,7 @@ import { sql } from '../../lib/neon';
 async function fetchUsers() {
   try {
     const users = await sql`
-      SELECT email
+      SELECT email , last_login
       FROM gitusers       
     `;
     return users;
@@ -24,16 +24,16 @@ const users = await fetchUsers();
     <table class="modern-table">
       <thead>
         <tr>
-          <th>ID</th>
+        
           <th>Email</th>
-            <th>Last Login</th>
+         <th>Last Login</th>
          
         </tr>
       </thead>
       <tbody id="userTableBody">
         {users.map((users) => (
           <tr id={`user-${users.id}`}>
-            <td>{users.id}</td>
+            
             
             <td>{users.email}</td>
             <td>{users.last_login}</td>

@@ -4,10 +4,33 @@ import { getSession } from "auth-astro/server";
 import { SignIn, SignOut } from "auth-astro/components";
 import GitHub from "@auth/core/providers/github";
 import Email from "@auth/core/providers/email";
-
-const session = await getSession(Astro.request);
+import { sql } from "../lib/neon";
 const env = import.meta.env;
+const session = await getSession(Astro.request);
+async function storeUserEmail(email: string) {
+  try {
 
+    await sql`
+  INSERT INTO gitusers (email, last_login)
+  VALUES (${email}, CURRENT_TIMESTAMP)
+  ON CONFLICT (email) DO NOTHING;
+`;
+
+
+  } catch (error) {
+    console.error("Error storing email in Neon:", error);
+    return Astro.redirect('/error'); 
+  }
+}
+
+if (session && session.user) {
+  if (session.user.email) {
+    await storeUserEmail(session.user.email);
+  }
+
+ 
+
+}
 
 
 ---
