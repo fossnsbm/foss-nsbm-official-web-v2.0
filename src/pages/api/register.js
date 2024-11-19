@@ -46,7 +46,7 @@ export async function POST({ request }) {
     return new Response(null, {
       status: 302,
       headers: {
-        Location: '/event', 
+        Location: '/Acess', 
       },
     });
   } catch (error) {

@@ -60,9 +60,12 @@ const env = import.meta.env;
             >
 
             <span class="relative text-base font-semibold text-white"
-              >For Contributing..</span >
+              >For Contributing</span >
           </a>
-          
+            <a href="#" class="relative flex h-11 w-full items-center justify-center  px-6 before:absolute before:inset-0 before:rounded-full before:border before:border-transparent before:bg-primary/10 before:bg-gradient-to-b before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max" >
+                        <span class="relative text-base font-semibold text-primary"
+                          >Learn more</span>
+                      </a>
 
             ):
             
@@ -71,26 +74,32 @@ const env = import.meta.env;
               <div class="flex justify-center w-full flex-col text-center gap-5">
                <h1 class=" text-gray-900 font-medium text-4xl">Welcome to the Foss Community</h1>
                <h2>{session.user?.name}</h2>
-               <div class="w-full justify-center flex">
+               <div class="w-full justify-center flex gap-7" >
+
+                {(session?.user?.email===env.EMAIL_ADMIN) &&(
+              
+            
+           
+            
+              <a
+             href="/dash/dashboard"
+            
+              class="relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
+              data-astro-transition
+              
+              >
+  
+              <span class="relative text-base font-semibold text-white"
+                >Dashbord</span >
+            </a>
+               
+                )}
+
                <a href="#" class="relative flex h-11 w-full items-center justify-center  px-6 before:absolute before:inset-0 before:rounded-full before:border before:border-transparent before:bg-primary/10 before:bg-gradient-to-b before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max" >
                         <span class="relative text-base font-semibold text-primary"
                           >Learn more</span>
                       </a>
-                      {(session?.user?.email===env.EMAIL_ADMIN) &&(
-              
-            
-              <a
-              href="/dash/dashboard"
-               
-               class="relative flex  h-9 w-full items-center justify-center px-4 before:absolute before:inset-0 before:rounded-full before:bg-info cursor-pointer before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
-               >
-                <span class="relative text-sm font-semibold text-white"
-                  >Dashbord</span>
-                
-              </a>
-            
-             
-              )}
+                      
                     </div>
               </div>
               
