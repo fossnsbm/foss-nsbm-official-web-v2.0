@@ -1,31 +1,36 @@
-import { defineConfig } from "astro/config";
-import partytown from "@astrojs/partytown";
-import tailwind from "@astrojs/tailwind";
-import auth from 'auth-astro';
-import sitemap from "@astrojs/sitemap";
-import vercel from '@astrojs/vercel/serverless';
+import { defineConfig } from 'astro/config'
+import partytown from '@astrojs/partytown'
+import sitemap from '@astrojs/sitemap'
+import vercel from '@astrojs/vercel'
+import tailwindcss from '@tailwindcss/vite'
 // https://astro.build/config
 export default defineConfig({
   redirects: {
-    '/old-page': '/new-page'
+    '/old-page': '/new-page',
   },
-  output: 'server',  // or 'hybrid' for hybrid rendering
+
+  // or 'hybrid' for hybrid rendering
+  output: 'server',
+
   adapter: vercel(),
-  site: "https://fossnsbm.org",
+  site: 'https://fossnsbm.org',
+
   integrations: [
-    auth(),
-    tailwind(),
     sitemap(),
     partytown({
       config: {
-        forward: ["dataLayer.push"],
+        forward: ['dataLayer.push'],
       },
     }),
   ],
+
   middleware: [
     {
       src: './src/middleware.ts', // Ensure the correct path here
     },
   ],
-  
-});
+
+  vite: {
+    plugins: [tailwindcss()],
+  },
+})
