@@ -22,5 +22,13 @@
     "neon": "^2.30.0",
     "tailwindcss": "^4.3.2",
     "typescript": "^6.0.3"
+  },
+  "devDependencies": {
+    "prettier": "^3.9.4",
+    "prettier-plugin-astro": "^0.14.1"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
   }
 }

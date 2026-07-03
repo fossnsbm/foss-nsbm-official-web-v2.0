@@ -1,4 +1,3 @@
-
 // export async function fetchData<Selected extends Endpoint>(endpoint: Selected) {
 // 	const apiEndpoint = `${API_URL}${endpoint}`;
 
