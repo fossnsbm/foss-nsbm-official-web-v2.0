@@ -3,11 +3,11 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
+    "dev": "node init && astro dev",
+    "start": "node init && astro dev",
     "format-and-lint": "bunx --bun biome check",
     "format-and-lint:fix": "bunx --bun biome check --write",
-    "build": "astro check && astro build",
+    "build": "node init && astro check && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -19,6 +19,8 @@
     "@astrojs/vercel": "^11.0.2",
     "@tailwindcss/vite": "^4.3.2",
     "astro": "^7.0.6",
+    "cheerio": "^1.2.0",
+    "fast-xml-parser": "^5.11.2",
     "tailwindcss": "^4.3.2",
     "typescript": "^6.0.3"
   },
