@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
+    "format-and-lint": "bunx --bun biome check",
+    "format-and-lint:fix": "bunx --bun biome check --write",
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro"
@@ -21,11 +23,6 @@
     "typescript": "^6.0.3"
   },
   "devDependencies": {
-    "prettier": "^3.9.4",
-    "prettier-plugin-astro": "^0.14.1"
-  },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true
+    "@biomejs/biome": "2.5.15"
   }
 }
