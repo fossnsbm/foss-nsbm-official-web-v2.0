@@ -1,0 +1,9 @@
+pre-commit:
+  commands:
+    format:
+      run: bunx --bun biome check --no-errors-on-unmatched --write {staged_files}
+      stage_fixed: true
+pre-push:
+  commands:
+    build:
+      run: bun run build
