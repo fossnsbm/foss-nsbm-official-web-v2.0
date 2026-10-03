@@ -3,11 +3,11 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
+    "dev": "node init && astro dev",
+    "start": "node init && astro dev",
     "format-and-lint": "bunx --bun biome check",
     "format-and-lint:fix": "bunx --bun biome check --write",
-    "build": "astro check && astro build",
+    "build": "node init && astro check && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -23,6 +23,7 @@
     "typescript": "^6.0.3"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.5.15"
+    "@biomejs/biome": "2.5.15",
+    "lefthook": "^2.1.16"
   }
 }
