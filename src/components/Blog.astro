@@ -22,7 +22,7 @@ const blogData: BlogPost[] = parser.parse(xmlData).rss.channel.item
 const latestPosts = blogData.slice(0, 3)
 ---
 
-<div id="blog">
+<div class="pt-32" id="blog">
   <Container>
       <div class="mb-12 space-y-2 text-center">
         <h2 class="text-3xl font-bold text-gray-800 md:text-4xl ">Latest Articles</h2>
